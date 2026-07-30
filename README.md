@@ -132,3 +132,42 @@ Docker Volumeを作成し、`/data`ディレクトリへマウントしました
 - HTTPS（Let's Encrypt）対応
 - AWS RDSとの連携
 - CloudWatchによる監視環境構築
+
+---
+
+# ディレクトリ構成
+
+```text
+aws-linux-webserver-project
+│
+├── README.md
+├── docs
+│   ├── 01-EC2.md
+│   ├── 02-Linux.md
+│   ├── 03-Nginx.md
+│   ├── 04-Nodejs.md
+│   ├── 05-Docker.md
+│   └── 06-Docker-Volume.md
+│
+├── images
+│   ├── architecture.png
+│   ├── nginx.png
+│   ├── node.png
+│   ├── docker.png
+│   └── volume.png
+│
+└── docker
+    ├── Dockerfile
+    └── server.js
+```
+
+---
+
+# 詳細ドキュメント
+
+- [01. EC2構築](docs/01-EC2.md)
+- [02. Linux基本操作](docs/02-Linux.md)
+- [03. Nginx構築](docs/03-Nginx.md)
+- [04. Node.js](docs/04-Nodejs.md)
+- [05. Docker](docs/05-Docker.md)
+- [06. Docker Volume](docs/06-Docker-Volume.md)
