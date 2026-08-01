@@ -63,7 +63,10 @@ EC2インスタンスの作成からSSHによるリモート接続、Linuxサー
              Docker Volume
 ```
 
-※構成図は後日追加予定です。
+# システム構成
+
+![Architecture](images/architecture.png)
+
 
 ---
 
