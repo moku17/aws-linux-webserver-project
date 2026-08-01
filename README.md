@@ -1,28 +1,27 @@
-# aws-linux-webserver-project
-EC2・Linux・Nginx・Node.js・Dockerを利用したインフラ構築プロジェクト
-
-
 # AWS Linux Web Server 構築プロジェクト
 
-## プロジェクト概要
-
-AWS EC2（Ubuntu）上にLinuxサーバーを構築し、NginxとNode.jsを利用したWebアプリケーションをインターネットへ公開したプロジェクトです。
-
-EC2インスタンスの作成からSSHによるリモート接続、Linuxサーバーの設定、AWS Security Groupの構成、Nginx Webサーバーの構築、Node.jsアプリケーションの実行、Dockerによるコンテナ化まで一連の構築を行いました。
-
-また、構築中に発生したネットワークおよびサーバーの問題について、Linuxコマンドやログを利用して原因を調査し、解決まで実施しました。
+![AWS](https://img.shields.io/badge/AWS-EC2-orange)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-Linux-E95420)
+![Nginx](https://img.shields.io/badge/Nginx-Web%20Server-009639)
+![Node.js](https://img.shields.io/badge/Node.js-18-339933)
+![Docker](https://img.shields.io/badge/Docker-2496ED)
+![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717)
 
 ---
 
-# プロジェクト目的
+# プロジェクト概要
 
-- AWS EC2を利用したLinuxサーバー構築
-- SSHによるリモートサーバー管理
-- Nginx Webサーバーの構築・公開
-- Node.jsアプリケーションの実行
-- Dockerを利用したアプリケーションのコンテナ化
-- Docker Volumeによるデータ永続化の実装
-- Linux環境での障害調査およびトラブルシューティングの経験
+AWS EC2（Ubuntu）上にLinuxサーバーを構築し、NginxとNode.jsを利用したWebアプリケーションをインターネットへ公開したプロジェクトです。
+
+EC2インスタンスの作成、SSHによるリモート接続、Linuxサーバーの設定、AWS Security Groupの構成、Nginx Webサーバーの構築、Node.jsアプリケーションの実行、Dockerによるコンテナ化まで一連の構築を行いました。
+
+また、構築中に発生したネットワークやサーバーの問題について、Linuxコマンドやログを利用して原因を調査し、解決まで実施しました。
+
+---
+
+# システム構成
+
+![Architecture](images/architecture.png)
 
 ---
 
@@ -40,46 +39,55 @@ EC2インスタンスの作成からSSHによるリモート接続、Linuxサー
 
 ---
 
-# システム構成
-
-```text
-                Internet
-                    │
-                    ▼
-        AWS Security Group
-          (HTTP / SSH)
-                    │
-                    ▼
-            EC2 (Ubuntu)
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-      Nginx                 Node.js
-        │                       │
-        └───────────┬───────────┘
-                    │
-            Docker Container
-                    │
-             Docker Volume
-```
-
-# システム構成
-
-![Architecture](images/architecture.png)
-
-
----
-
 # 主な構築内容
+
+## EC2・Linux環境構築
 
 - AWS EC2（Ubuntu）インスタンス作成
 - SSHによるリモート接続
-- Linux環境の構築および基本操作
-- Nginxのインストール・公開
-- Node.js HTTPサーバーの構築
-- Docker環境の構築
-- Dockerfileによる独自イメージ作成
-- Docker Volumeによるデータ永続化の確認
+- Linux基本操作
+- Linuxサービス・プロセス管理
+- ネットワーク確認
+
+---
+
+## Nginx Web Server
+
+Nginxをインストールし、AWS Security Groupを設定して外部公開しました。
+
+ブラウザから正常にアクセスできることを確認しました。
+
+![Nginx](images/nginx.jpg)
+
+---
+
+## Node.js Application
+
+Node.js HTTP Serverを作成し、3000番ポートで公開しました。
+
+ブラウザからアプリケーションへアクセスし、正常にレスポンスが返ることを確認しました。
+
+![Node.js](images/node.jpg)
+
+---
+
+## Docker
+
+Dockerfileを作成し、Node.jsアプリケーションをDocker ImageとしてBuildしました。
+
+作成したImageからContainerを起動し、ブラウザから正常にアクセスできることを確認しました。
+
+![Docker](images/docker.jpg)
+
+---
+
+## Docker Volume
+
+Docker Volumeを利用してデータを永続化しました。
+
+Containerを削除・再作成した後も保存したデータが保持されることを確認しました。
+
+![Docker Volume](images/volume.jpg)
 
 ---
 
@@ -97,15 +105,15 @@ Inbound RuleへHTTP（TCP 80）を追加しました。
 
 ### 結果
 
-EC2のPublic IPアドレスから正常にWebページへアクセスできることを確認しました。
+EC2 Public IPから正常にアクセスできることを確認しました。
 
 ---
 
-## ② Dockerコンテナ削除後にデータが消える
+## ② Docker Container削除後にデータが消える
 
 ### 原因
 
-コンテナ内部のデータはコンテナのライフサイクルに依存していました。
+Container内部のデータはContainerのライフサイクルに依存していました。
 
 ### 対応
 
@@ -113,18 +121,21 @@ Docker Volumeを作成し、`/data`ディレクトリへマウントしました
 
 ### 結果
 
-コンテナを再作成した後もデータが保持されることを確認しました。
+Containerを再作成した後もデータが保持されることを確認しました。
 
 ---
 
 # このプロジェクトで学んだこと
 
 - AWS EC2を利用したLinuxサーバー構築
-- Security Groupとポート制御の仕組み
+- SSHによるリモートサーバー管理
 - Linuxサービスおよびプロセス管理
+- Security Groupとポート制御の仕組み
+- NginxによるWebサーバー公開
+- Node.jsアプリケーションの実行
 - Docker ImageとContainerの違い
 - Docker Volumeによるデータ永続化
-- 障害発生時の原因調査およびトラブルシューティング
+- トラブル発生時の原因調査と問題解決
 
 ---
 
@@ -135,34 +146,6 @@ Docker Volumeを作成し、`/data`ディレクトリへマウントしました
 - HTTPS（Let's Encrypt）対応
 - AWS RDSとの連携
 - CloudWatchによる監視環境構築
-
----
-
-# ディレクトリ構成
-
-```text
-aws-linux-webserver-project
-│
-├── README.md
-├── docs
-│   ├── 01-EC2.md
-│   ├── 02-Linux.md
-│   ├── 03-Nginx.md
-│   ├── 04-Nodejs.md
-│   ├── 05-Docker.md
-│   └── 06-Docker-Volume.md
-│
-├── images
-│   ├── architecture.png
-│   ├── nginx.png
-│   ├── node.png
-│   ├── docker.png
-│   └── volume.png
-│
-└── docker
-    ├── Dockerfile
-    └── server.js
-```
 
 ---
 
