@@ -67,10 +67,6 @@ Linuxではファイルごとにアクセス権限を設定できます。
 
 ```bash
 chmod 777 permission-test.txt
-
-chmod 644 permission-test.txt
-
-chmod 400 permission-test.txt
 ```
 
 確認
